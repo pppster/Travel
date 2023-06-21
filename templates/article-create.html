@@ -16,23 +16,21 @@
       Create article
     </div>
 
-    <div class="card-body">
+
+
+    <center>
+    <div class="card-body" style="width:75%">
       <form action='' method='POST'>
         {% csrf_token %}
 
-        <div class="mb-3">
-          <input type="textarea" class="form-control" name="title" placeholder="Insert title" style="width: 50%;">
-        </div>
-
-        <div class="mb-3">
-            <input type="textarea" class="form-control" name="content" placeholder="Insert content" style="width: 50%;">
-        </div>
+        {{form.as_p }}
 
         <div>
           <button type='submit' class="btn btn-outline-secondary">Create article</button>
         </div>
       </form>
     </div>
+  </center>
   </div>
 </center>
                 

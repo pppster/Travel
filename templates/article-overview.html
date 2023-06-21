@@ -10,18 +10,6 @@
         <h1>Overview</h1>
     </header>
 
-    <main>
-        <section>
-            <ul>
-                {% for article in articles %}
-                    <li class="lead">
-                        {% comment %} <a href="/">{{article.title}}</a> {% endcomment %}
-                        <a href="/article/{{ article.id }}">{{article.title}}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </main>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for article in articles %}
         <div class="col">

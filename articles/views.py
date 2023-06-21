@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
 
+from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
 
 from .models import Article
@@ -27,7 +28,7 @@ def articles_overview(request):
     return HttpResponse(template.render(context, request))
 
 @login_required
-def article_create(request):
+def article_create2(request):
     article_form = ArticleForm(request.POST or None)
     context = {
         'article_form': article_form
@@ -42,3 +43,20 @@ def article_create(request):
 
     template = loader.get_template('article-create.html')
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def article_create(request):
+    submitted = False
+    form = ArticleForm()  # Instantiate the form before the conditional block
+
+    if request.method == "POST":
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/creation?submitted=True')
+    else:
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'article-create.html', {'form': form, 'submitted': submitted})
