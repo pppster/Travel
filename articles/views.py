@@ -54,7 +54,10 @@ def article_create(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/creation?submitted=True')
+            return HttpResponseRedirect('/article/create?submitted=True')
+        else:
+            messages.success(request, ('Something is wrong.'))
+
     else:
         if 'submitted' in request.GET:
             submitted = True

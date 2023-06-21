@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'article.css' %}">
+</head>
 
 {% block title %}
 Article
@@ -8,13 +30,28 @@ Article
 
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'article.css' %}">
-    
-    <header>
-        <h1 class="article-heading">{{ article.title }}</h1>
-    </header>
 
-    <p class="lead">
-        {{ article.content }}
-    </p>
+    
+<body>
+
+    <div class="jumbotron">
+        <h1 class="display-4">{{ article.title }}</h1>
+        <p class="lead">{{ article.summary }}</p>
+        <small>{{ article.date_created }}</small>
+        <hr class="my-4">
+        <p>{{ article.content }}</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-sm" href="/overview" role="button">Back to Overview</a>
+        </p>
+      </div>
+
+
+
+</body>
+
+
 {% endblock %}
+
+
+
+</html>
