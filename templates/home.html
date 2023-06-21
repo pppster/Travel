@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+
+{% block content %}
+
+    <!-- hero section -->
+
+
+    <header class="masthead">
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12 text-center">
+              <h1 class="fw-light">My Semester abroad in Malaysia</h1>
+              <p class="lead">Some images and impressions of an exchange student</p>
+              <a href="/overview"><button class="btn btn-outline-secondary">See all blog posts</button></a>
+            </div>
+          </div>
+        </div>
+    </header>
+    </br>
+
+    <!-- hero section -->
+
+<div class="container">
+    <div class="row row-cols-4">
+      <div class="col">
+        <h5 class="fw-light">About me</h5>
+        <img src="static/aboutme.jpg" class="img-fluid">
+        <p class="lead">
+            Hi, I'm Jan Niklas, a Mechatronics student from Germany.
+            I had the incredible opportunity to study abroad in Malaysia, and I want to share my experiences with you.
+            Explore my website to learn more about my adventures, the culture, the people, and everything else that made my study abroad journey unforgettable.
+        </p>
+    </div>
+    <div class="col">
+        <h5 class="fw-light">Discover Malaysia</h5>
+        <img src="static/discovermy.jpg" class="img-fluid">
+        <p class="lead">
+            Malaysia is a beautiful country located in Southeast Asia. It offers a vibrant mix of cultures, stunning landscapes, and a rich history.
+            During my time there, I had the chance to explore bustling cities like Kuala Lumpur, immerse myself in the breathtaking nature of the Cameron Highlands, and relax on the stunning beaches of Langkawi.
+            Malaysia's diverse cuisine, warm hospitality, and fascinating traditions made it a truly remarkable destination for my study abroad adventure.
+        </p>
+    </div>
+      <div class="col">
+        <h5 class="fw-light">My Experiences</h5>
+        <img src="static/experiences.jpg" class="img-fluid">
+        <p class="lead">
+            Throughout my study abroad journey, I had the opportunity to engage in various activities and immerse myself in the local lifestyle.
+            From attending cultural festivals and trying traditional Malaysian dishes to participating in community service projects and forming lifelong friendships with fellow international students, every moment was filled with valuable experiences and personal growth.
+            On this website, I'll be sharing stories, photos, and reflections from my time in Malaysia.
+        </p>
+    </div>
+      <div class="col">
+        <h5 class="fw-light">Join Me on this Adventure</h5>
+        <img src="static/adventure.jpg" class="img-fluid">
+        <p class="lead">
+            I invite you to join me on this virtual journey through my study abroad experience in Malaysia.
+            Feel free to explore the different sections of the website, browse through the photo gallery, and read my blog posts to get a glimpse into the amazing moments and memories I created during my time abroad.
+            If you have any questions or would like to share your own experiences, don't hesitate to reach out to me. Let's embark on this adventure together!
+        </p>
+        </div>
+    </div>
+  </div>
+
+
+            
+
+
+{% endblock %}
+
+
+
+
+
+

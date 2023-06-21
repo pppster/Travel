@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Article
+{% endblock %}
+
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'article.css' %}">
+    
+    <header>
+        <h1 class="article-heading">{{ article.title }}</h1>
+    </header>
+
+    <p class="lead">
+        {{ article.content }}
+    </p>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Logout
+{% endblock %}
+
+
+{% block content %}
+<center>
+    <div class="card" style="width: 50%;">
+        <div class="card-header">
+            Logout
+        </div>
+
+        <div class="card-body">
+            {% if  request.user.is_authenticated %}        
+                <form method='POST'>{% csrf_token %}
+                    <p class="lead">Are you sure you want to logout?</p>
+                    <button type='submit' class="btn btn-outline-secondary">Yes, logout</button>
+                </form>
+            {% else %}
+                <p class="lead">You're not logged in!</p>
+                <p class="lead">Would you like to <a href='/login'>login?</a></p>
+            {% endif %}
+        </div>
+    </div>
+</center>
+
+{% endblock %}

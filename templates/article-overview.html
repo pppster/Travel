@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Overview
+{% endblock %}
+
+
+{% block content %}
+    <header>
+        <h1>Overview</h1>
+    </header>
+
+    <main>
+        <section>
+            <ul>
+                {% for article in articles %}
+                    <li class="lead">
+                        {% comment %} <a href="/">{{article.title}}</a> {% endcomment %}
+                        <a href="/article/{{ article.id }}">{{article.title}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+{% endblock %}

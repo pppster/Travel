@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Create
+{% endblock %}
+
+
+{% block content %}
+
+{% if not created %}
+<center>
+  <div class="card" style="width: 50%;">
+
+    <div class="card-header">
+      Create article
+    </div>
+
+    <div class="card-body">
+      <form action='' method='POST'>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <input type="textarea" class="form-control" name="title" placeholder="Insert title" style="width: 50%;">
+        </div>
+
+        <div class="mb-3">
+            <input type="textarea" class="form-control" name="content" placeholder="Insert content" style="width: 50%;">
+        </div>
+
+        <div>
+          <button type='submit' class="btn btn-outline-secondary">Create article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</center>
+                
+
+
+{% else %}
+<center>
+  <div class="card" style="width: 50%;">
+
+    <div class="card-header">
+      Article created
+    </div>
+
+    <div class="card-body">
+      <p class="lead">Your article was created</p>
+      <a class="lead" href="/article/{{ article.id }}">{{article.title}}</a>
+    </div>
+  </div>
+</center>
+
+
+
+{% endif %}
+    
+{% endblock %}
