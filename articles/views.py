@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
 
-from .models import Article
+from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 
 
@@ -14,12 +14,14 @@ def article(request, id):
     submitted = False
     form = CommentForm()
     article = Article.objects.get(id=id)
+    comments = Comment.objects.filter(article=id)
 
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.creator = request.user.id # logged in user
+            comment.creator = request.user.id 
+            comment.article = id 
             comment.save()
             
             messages.success(request, ('Your comment was successfully stored'))
@@ -28,7 +30,7 @@ def article(request, id):
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted})
+    return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted,'comments':comments})
 
 
 
