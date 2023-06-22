@@ -7,15 +7,29 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
 
 from .models import Article
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
+
 
 def article(request, id):
+    submitted = False
+    form = CommentForm()
     article = Article.objects.get(id=id)
-    context = {
-        'article': article,
-    }
-    template = loader.get_template('article.html')
-    return HttpResponse(template.render(context, request))
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.creator = request.user.id # logged in user
+            comment.save()
+            
+            messages.success(request, ('Your comment was successfully stored'))
+            return HttpResponseRedirect(f"/article/{id}?submitted=True")
+    else:
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted})
+
 
 
 def articles_overview(request):
