@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Edit
+{% endblock %}
+
+
+{% block content %}
+
+{% if not created %}
+<center>
+  <div class="card" style="width: 50%;">
+
+    <div class="card-header">
+      Edit article
+    </div>
+
+
+
+    <center>
+    <div class="card-body" style="width:75%">
+      <form action='' method='POST'>
+        {% csrf_token %}
+
+        {{form.as_p }}
+
+        <div>
+          <button type='submit' class="btn btn-outline-secondary">Create article</button>
+        </div>
+      </form>
+    </div>
+  </center>
+  </div>
+</center>
+                
+
+
+{% else %}
+<center>
+  <div class="card" style="width: 50%;">
+
+    <div class="card-header">
+      Article created
+    </div>
+
+    <div class="card-body">
+      <p class="lead">Your article was created</p>
+      <a class="lead" href="/article/{{ article.id }}">{{article.title}}</a>
+    </div>
+  </div>
+</center>
+
+
+
+{% endif %}
+    
+{% endblock %}

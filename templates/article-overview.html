@@ -18,6 +18,9 @@
             <div class="card-body">
               <h5 class="card-title"><a href="/article/{{ article.id }}">{{article.title}}</a></h5>
               <p class="card-text">{{article.summary}}</p>
+              {% if user.is_staff %}
+              <a href="/article-edit/{{ article.id }}" class="btn btn-outline-secondary">Edit</a>
+              {% endif %}
             </div>
           </div>
         </div>
