@@ -6,5 +6,7 @@ urlpatterns = [
     path(route='article/create', view=views.article_create, name='article-create'),
     path(route='article-edit/<int:article_id>', view=views.article_edit, name="article-edit"),
     path(route='overview/', view=views.articles_overview, name='article-overview'),
+    path(route='article-delete/<int:article_id>/', view=views.delete_article, name='delete_article'),
+
     
 ]

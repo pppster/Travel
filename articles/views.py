@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
@@ -31,6 +31,14 @@ def article(request, id):
             submitted = True
 
     return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted,'comments':comments})
+
+@login_required
+def delete_article(request, article_id):
+    article = Article.objects.get(pk=article_id)
+    article.delete()
+    messages.success(request, 'Article deleted successfully.')
+    return redirect('/overview/')
+    
 
 
 
