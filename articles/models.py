@@ -16,3 +16,6 @@ class Comment(models.Model):
     creator = models.IntegerField("Comment Creator", blank=False, default=1)
     article = models.IntegerField("Article", blank=False, default=1)
 
+class Images(models.Model):
+    file = models.FileField(null=True, upload_to='images/')
+    title = models.TextField(default='title')

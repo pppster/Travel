@@ -22,8 +22,10 @@
     <div class="card-body" style="width:75%">
       <form action='' method='POST' enctype="multipart/form-data">
         {% csrf_token %}
+        
 
         {{form.as_p }}
+
 
         <div>
           <button type='submit' class="btn btn-outline-secondary">Create article</button>

@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
 
-from .models import Article, Comment
+from .models import Article, Comment, Images
 from .forms import ArticleForm, CommentForm
 
 
@@ -15,6 +15,7 @@ def article(request, id):
     form = CommentForm()
     article = Article.objects.get(id=id)
     comments = Comment.objects.filter(article=id)
+    images = Images.objects.filter(title=article.title)
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -30,7 +31,7 @@ def article(request, id):
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted,'comments':comments})
+    return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted,'comments':comments, 'images': images})
 
 @login_required
 def delete_article(request, article_id):
@@ -45,7 +46,7 @@ def delete_article(request, article_id):
 def articles_overview(request):
     articles = Article.objects.all()
     context = {
-        'articles': articles
+        'articles': articles,
     }
     template = loader.get_template('article-overview.html')
     return HttpResponse(template.render(context, request))
@@ -74,7 +75,11 @@ def article_create(request):
     form = ArticleForm()
 
     if request.method == "POST":
+        files = request.FILES.getlist('file')
+        for file in files:
+            Images.objects.create(file=file, title=request.POST.get('title'))
         form = ArticleForm(request.POST, request.FILES)
+        print(request.POST.get('title'))
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/article/create?submitted=True')

@@ -5,7 +5,6 @@ from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
     image = forms.ImageField(label='Image', required=False)
-
     class Meta:
         model = Article
         fields = ('title', 'summary', 'content', 'image')
