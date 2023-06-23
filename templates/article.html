@@ -3,26 +3,7 @@
 {% load static %}
 
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        
-        p {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-    </style>
-    <link rel="stylesheet" href="{% static 'article.css' %}">
+  <link rel="stylesheet" href="{% static 'article.css' %}">
 </head>
 
 {% block title %}
@@ -32,56 +13,71 @@ Article
 
 {% block content %}
 
-    
+
 <body>
 
-    <div class="jumbotron">
-        <h1 class="display-4">{{ article.title }}</h1>
-        <p class="lead">{{ article.summary }}</p>
-        <small>{{ article.date_created }}</small>
-        <hr class="my-4">
-        <p>{{ article.content }}</p>
-        <p class="lead">
-          <a class="btn btn-primary btn-sm" href="/overview" role="button">Back to Overview</a>
-        </p>
+  <div class="container">
+    <div class="row">  {% comment %} data-masonry='{"percentPosition": true }' {% endcomment %}
+      <div class="col-md-8">
+        <div class="card border-3 shadow" >
+          <div class="card-header">
+            <h1 class="display-4">{{ article.title }}</h1>
+            <p class="lead">{{ article.summary }}</p>
+            <small>{{ article.date_created }}</small>
+            <hr class="my-4">
+          </div>
+
+
+          <div class="card-body">
+            <p>{{ article.content }}</p>
+            <p class="lead">
+              <a class="btn btn-outline-secondary" href="/overview" role="button">Back to Overview</a>
+            </p>
+          </div>
+        </div>
       </div>
 
-      <center>
-        <div class="card" style="width: 75%;">
-            <div class="card">
-                <div class="card-header">
-                  Comments
-                </div>
-                <div class="card-body">
-                    {% for comment in comments %}
-                  <blockquote class="blockquote mb-0">
-                    <p>{{comment.text}}</p>
-                    <footer class="blockquote-footer"><cite title="Source Title">on {{comment.date_created}} by {{ comment.creator|get_user_by_id }}</cite></footer>
-                  </blockquote>
-                  <hr>
-                  {% endfor %}
-                </div>
-              </div>
+      <div class="col-md-4">
+        <div class="card border-3 shadow">
+          <div class="card-header">
+            Comments
+          </div>
+
+          <div class="card-body">
+            {% for comment in comments %}
+            <blockquote class="blockquote mb-0">
+            <p>{{comment.text}}</p>
+            <footer class="blockquote-footer"><cite title="Source Title">on {{comment.date_created}} by {{ comment.creator|get_user_by_id }}</cite></footer>
+            </blockquote>
+            <hr>
+            {% endfor %}
+          </div>
+
+          <div>
+            {% if user.is_authenticated%}
+            <center>
               <form action='' method='POST' style="width=50%">
                 {% csrf_token %}
-        
+                
                 {{form.as_p }}
-        
+                
                 <div>
                   <button type='submit' class="btn btn-outline-secondary">Add Comment</button>
                 </div>
               </form>
+              {% else %}
+              <p class="lead">
+                <a href='/login'>Login</a> to leave a comment.
+              </p>
+            </center>
+            {% endif %}
           </div>
-        </center>
-      
 
-      <div>
-
+        </div>
       </div>
 
-
-
-
+    </div>
+  </div>
 </body>
 
 

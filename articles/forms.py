@@ -4,19 +4,22 @@ from .models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):
+    image = forms.ImageField(label='Image', required=False)
+
     class Meta:
         model = Article
-        fields = ('title', 'summary', 'content')
+        fields = ('title', 'summary', 'content', 'image')
         labels = {
             'title': '',
             'summary': '',
             'content': '',
+            'image': '',
         }
-        
         widgets = {
-            'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Add a Title'}),
-            'summary': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter a short description'}),
-            'content': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Enter your content'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add a Title'}),
+            'summary': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter a short description'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your content'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
 
 class CommentForm(forms.ModelForm):
@@ -28,5 +31,5 @@ class CommentForm(forms.ModelForm):
         }
         
         widgets = {
-            'text': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Leave your comment'}),
+            'text': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Leave your comment', 'width': '50%'}),
         }

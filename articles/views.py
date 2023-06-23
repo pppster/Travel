@@ -43,30 +43,29 @@ def delete_article(request, article_id):
 
 
 def articles_overview(request):
-    articles = Article.objects.all().values()
+    articles = Article.objects.all()
     context = {
         'articles': articles
     }
-
     template = loader.get_template('article-overview.html')
     return HttpResponse(template.render(context, request))
 
-@login_required
-def article_create2(request):
-    article_form = ArticleForm(request.POST or None)
-    context = {
-        'article_form': article_form
-    }
+# @login_required
+# def article_create2(request):
+#     article_form = ArticleForm(request.POST or None)
+#     context = {
+#         'article_form': article_form
+#     }
 
-    if article_form.is_valid():
-        article = article_form.save()
-        context['form'] = ArticleForm()
-        messages.success(request, ('Your article was successfully stored'))
-    else:
-        messages.success(request, ('Your article was not stored'))
+#     if article_form.is_valid():
+#         article = article_form.save()
+#         context['form'] = ArticleForm()
+#         messages.success(request, ('Your article was successfully stored'))
+#     else:
+#         messages.success(request, ('Your article was not stored'))
 
-    template = loader.get_template('article-create.html')
-    return HttpResponse(template.render(context, request))
+#     template = loader.get_template('article-create.html')
+#     return HttpResponse(template.render(context, request))
 
 
 @login_required
@@ -75,7 +74,7 @@ def article_create(request):
     form = ArticleForm()
 
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/article/create?submitted=True')

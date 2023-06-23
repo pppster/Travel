@@ -21,7 +21,7 @@
                 <form action='' method='POST'>
                     {% csrf_token %}
 
-                    <div class="mb-3">
+                    {% comment %} <div class="mb-3">
                         <input type="text" class="form-control" name="username" placeholder="Username" style="width: 50%;">
                     </div>
                     <div class="mb-3">
@@ -29,9 +29,9 @@
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" name="password2" placeholder="Password confirmation" style="width: 50%;">
-                    </div>
+                    </div> {% endcomment %}
 
-                    {% comment %} {{ form.as_p}} {% endcomment %}
+                    {{ form.as_p}}
 
                     <div><button type='submit' class="btn btn-outline-secondary">Register</button></div>
                 </form>

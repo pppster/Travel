@@ -6,6 +6,8 @@ class Article(models.Model):
     content = models.TextField()
     date_created = models.DateTimeField('Article Added',blank=True, auto_now_add=True)
     summary = models.TextField('Short Description')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    
 
 
 class Comment(models.Model):
@@ -13,7 +15,3 @@ class Comment(models.Model):
     date_created = models.DateTimeField('Comment Added',blank=True, auto_now_add=True)
     creator = models.IntegerField("Comment Creator", blank=False, default=1)
     article = models.IntegerField("Article", blank=False, default=1)
-
-
-class Image(models.Model):
-    pass
