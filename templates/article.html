@@ -53,9 +53,9 @@ Article
             {% endfor %}
           </div>
 
+          <center>
           <div>
             {% if user.is_authenticated%}
-            <center>
               <form action='' method='POST' style="width=50%">
                 {% csrf_token %}
                 
@@ -67,11 +67,11 @@ Article
               </form>
               {% else %}
               <p class="lead">
-                <a href='/login'>Login</a> to leave a comment.
+                <a href='/login'><button type="button" class="btn btn-outline-secondary">Login to leave a comment</button></a>
               </p>
-            </center>
-            {% endif %}
-          </div>
+              {% endif %}
+            </div>
+          </center>
 
         </div>
       </div>
