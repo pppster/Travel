@@ -4,4 +4,8 @@ from django.template import loader
 
 def home_view(request):
   template = loader.get_template('home.html')
-  return HttpResponse(template.render())
+  user = request.user
+  context = {
+        'user': user
+    }
+  return HttpResponse(template.render(context, request))

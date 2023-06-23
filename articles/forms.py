@@ -19,7 +19,7 @@ class ArticleForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add a Title'}),
             'summary': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter a short description'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your content'}),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
         }
 
 class CommentForm(forms.ModelForm):

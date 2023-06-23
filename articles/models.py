@@ -15,3 +15,4 @@ class Comment(models.Model):
     date_created = models.DateTimeField('Comment Added',blank=True, auto_now_add=True)
     creator = models.IntegerField("Comment Creator", blank=False, default=1)
     article = models.IntegerField("Article", blank=False, default=1)
+
