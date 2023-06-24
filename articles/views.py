@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
+from django.conf import settings
+import os
 
 from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
@@ -38,14 +40,31 @@ def delete_article(request, article_id):
     print(article_id)
     article = Article.objects.get(pk=article_id)
     images = Images.objects.filter(title=article.title)
+    for image in images:
+        print(image.filename())
+        image_path = os.path.join(settings.MEDIA_ROOT, 'images\\', image.filename())
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
     article.delete()
     images.delete()
     messages.success(request, 'Article deleted successfully.')
     return redirect('/overview/')
 
 @login_required
-def delete_image(request):
-    print("REQUEST: ", request)
+def delete_image(request, image_id):
+    previous_page = request.META.get('HTTP_REFERER')
+    image = Images.objects.get(pk=image_id)
+    image_path = os.path.join(settings.MEDIA_ROOT, 'images\\', image.filename())
+    print(image_path)
+    title = image.title
+    article = Article.objects.get(title=title)
+    article_id = article.id
+    if os.path.exists(image_path):
+        os.remove(image_path)
+    image.delete()
+    messages.success(request, 'Image deleted successfully.')
+    return redirect(previous_page)
 
     # image = Images.objects.get(file=image_name)
 
@@ -114,6 +133,9 @@ def article_edit(request, article_id):
     images = Images.objects.filter(title=article.title)
     form = ArticleForm(request.POST or None, instance=article)
     if request.method == "POST":
+        files = request.FILES.getlist('file')
+        for file in files:
+            Images.objects.create(file=file, title=request.POST.get('title'))
         if form.is_valid():
             new_title=form.data.get('title')
             Images.objects.filter(title=old_title).update(title=new_title)

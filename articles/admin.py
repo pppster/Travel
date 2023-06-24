@@ -6,7 +6,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display=['file', 'title']
+    list_display=['id', 'file', 'title']
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Images, ImageAdmin)

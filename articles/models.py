@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 class Article(models.Model):
@@ -19,3 +20,6 @@ class Comment(models.Model):
 class Images(models.Model):
     file = models.FileField(null=True, upload_to='images/')
     title = models.TextField(default='title')
+
+    def filename(self):
+        return os.path.basename(self.file.name)

@@ -24,17 +24,24 @@
         {% csrf_token %}
 
         {{form.as_p }}
+        <br />
+        <input type="file" name="file" multiple>
+        <br/>
+        <br/>
+
 
         {%for image in images%}
-          <div style="text-align: left">
-            <p>{{image.file}}</p>
+        <div class="row">
+          <div class="col" style="text-align: left">
             <img src="{{ image.file.url }}" class="img-thumbnail" alt="Some image" style="height:50px">
-            <a href="">
-              <button class="btn btn-outline-danger">Delete</button>
-            </a>
           </div>
-          <br />
+          <div class="col" style="text-align: left">
+            <a href={% url 'delete-image' image.id %} class="btn btn-outline-danger">Delete</a>
+          </div>
+        </div>
+        <br />
         {% endfor %}
+        <br/>
 
 
         <div>
