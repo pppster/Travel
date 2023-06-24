@@ -6,7 +6,7 @@ class Article(models.Model):
     content = models.TextField()
     date_created = models.DateTimeField('Article Added',blank=True, auto_now_add=True)
     summary = models.TextField('Short Description')
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    # image = models.ImageField(upload_to='images/', null=True, blank=True)
     
 
 

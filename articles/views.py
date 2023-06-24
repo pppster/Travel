@@ -35,10 +35,22 @@ def article(request, id):
 
 @login_required
 def delete_article(request, article_id):
+    print(article_id)
     article = Article.objects.get(pk=article_id)
+    images = Images.objects.filter(title=article.title)
     article.delete()
+    images.delete()
     messages.success(request, 'Article deleted successfully.')
     return redirect('/overview/')
+
+@login_required
+def delete_image(request):
+    print("REQUEST: ", request)
+
+    # image = Images.objects.get(file=image_name)
+
+    # image.delete()
+    # messages.success(request, 'Image deleted successfully.')
     
 
 
@@ -82,6 +94,7 @@ def article_create(request):
         print(request.POST.get('title'))
         if form.is_valid():
             form.save()
+            messages.success(request, ('Article was created'))
             return HttpResponseRedirect('/article/create?submitted=True')
         else:
             messages.success(request, ('Something is wrong.'))
@@ -97,12 +110,18 @@ def article_create(request):
 @login_required
 def article_edit(request, article_id):
     article = Article.objects.get(pk=article_id)
+    old_title=article.title
+    images = Images.objects.filter(title=article.title)
     form = ArticleForm(request.POST or None, instance=article)
-    if form.is_valid():
-        form.save()
-        return redirect('article-overview')
+    if request.method == "POST":
+        if form.is_valid():
+            new_title=form.data.get('title')
+            Images.objects.filter(title=old_title).update(title=new_title)
+            form.save()
+            return redirect('article-overview')
     return render(request,
                   'article-edit.html',
                   {'article': article,
-                   'form':form}
+                   'form':form,
+                   'images': images}
                   )

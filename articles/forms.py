@@ -4,21 +4,20 @@ from .models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):
-    image = forms.ImageField(label='Image', required=False)
     class Meta:
         model = Article
-        fields = ('title', 'summary', 'content', 'image')
+        fields = ('title', 'summary', 'content', ) # 'image'
         labels = {
             'title': '',
             'summary': '',
             'content': '',
-            'image': '',
+            # 'image': '',
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add a Title'}),
             'summary': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter a short description'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your content'}),
-            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
+            # 'image': forms.FileInput(attrs={'class': 'form-control-file'}),
         }
 
 class CommentForm(forms.ModelForm):

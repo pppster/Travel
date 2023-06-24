@@ -24,9 +24,11 @@
         {% csrf_token %}
 
         {{form.as_p }}
+        <br />
         <input type="file" name="file" multiple>
-
+        <br />
         <div>
+          <br />
           <button type='submit' class="btn btn-outline-secondary">Create article</button>
         </div>
       </form>
