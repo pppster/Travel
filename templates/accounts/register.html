@@ -18,23 +18,52 @@
                     <p class="lead">{{ error }}</p>
                 {% endif %}
                 
-                <form action='' method='POST'>
+                <form action='' method='POST' class="form-signin text-left">
                     {% csrf_token %}
+                    <center>
+                        <div class="form-group">
+                            {{ form.username }}
+                            {% for error in form.username.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.password1 }}
+                            {% for error in form.password1.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.password2 }}
+                            {% for error in form.password2.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        
+                        <script>
+                            document.getElementById("id_username").placeholder = "Username";
+                            document.getElementById("id_password1").placeholder = "Password";
+                            document.getElementById("id_password2").placeholder = "Confirm Password";
 
-                    {% comment %} <div class="mb-3">
-                        <input type="text" class="form-control" name="username" placeholder="Username" style="width: 50%;">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" name="password1" placeholder="Password" style="width: 50%;">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" name="password2" placeholder="Password confirmation" style="width: 50%;">
-                    </div> {% endcomment %}
+                            document.getElementById("id_username").classList.add("form-control");
+                            document.getElementById("id_password1").classList.add("form-control");
+                            document.getElementById("id_password2").classList.add("form-control");
 
-                    {{ form.as_p}}
-
-                    <div><button type='submit' class="btn btn-outline-secondary">Register</button></div>
-                </form>
+                            document.getElementById("id_username").style.width = "50%";
+                            document.getElementById("id_password1").style.width = "50%";
+                            document.getElementById("id_password2").style.width = "50%";
+                        </script>
+                        
+                        
+                        <div>
+                            <button type='submit' class="btn btn-outline-secondary">Register</button>
+                            <br/>
+                        </div>
+                    </center>
+                    </form>
+                    <br/>
                 <p class="lead">Already have an account? Please <a href='/login'>Login</a></p>
             {% else %}
                 <p class="lead">You're already logged in and cannot register. See all the articles <a href='/overview'>here</a></p>

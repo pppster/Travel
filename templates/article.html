@@ -61,7 +61,7 @@ Article
           <center>
           <div>
             {% if user.is_authenticated%}
-              <form action='' method='POST' style="width=50%">
+              <form action='' method='POST' class="w-75 mx-auto">
                 {% csrf_token %}
                 
                 {{form.as_p }}

@@ -38,59 +38,66 @@
         font-size: 18px;
         margin-bottom: 10px;
       }
+
     </style>
 
     <title>{% block title %}{% endblock %}</title>
   </head>
 
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarExample01">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              {% if user.is_authenticated%}
-              <li class="nav-item active">
-                <a class="nav-link" aria-current="page" href="/logout">Logout</a>
-              </li>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+            <a href="#" class="navbar-brand">My Malaysia</a>
+        
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navmenu"
+                >
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navmenu""">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+    
+                  <li class="nav-item">
+                    <a class="nav-link" href="/overview">Overview</a>
+                  </li>
+    
+                  {% if user.is_staff %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/article/create">Create article</a>
+                  </li>
+                  {% endif %}
 
-              {% else %}
-              <li class="nav-item active">
-                <a class="nav-link" aria-current="page" href="/login">Login</a>
-              </li>
+                  {% if user.is_authenticated%}
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                  </li>
 
-              <li class="nav-item active">
-                <a class="nav-link" aria-current="page" href="/register">Register</a>
-              </li>
-              {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="/overview">Overview</a>
-              </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" aria-current="page" href=""><i class="bi bi-person-square"></i> {{ user.username }}</a>
+                  </li>
+    
+    
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                  </li>
+    
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/register"><span class="glyphicon glyphicon-user"></span> Register</a>
+                  </li>
+                  {% endif %}
 
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-
-              {% if user.is_staff %}
-              <li class="nav-item">
-                <a class="nav-link" href="/article/create">Create article</a>
-              </li>
-              {% endif %}
-
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link text-info" href="">{{ user.username }}</a>
-              </li>
-              {% endif %}
-            </ul>
-          </div>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
       <!-- Navbar -->
 
 
