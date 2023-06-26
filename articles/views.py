@@ -7,6 +7,7 @@ import os
 
 from django.http import HttpResponseRedirect
 from django.contrib.auth. decorators import login_required
+from django.contrib.admin.views.decorators import  staff_member_required
 
 from .models import Article, Comment, Images
 from .forms import ArticleForm, CommentForm
@@ -35,7 +36,7 @@ def article(request, id):
 
     return render(request, 'article.html', {'article':article,'form': form, 'submitted': submitted,'comments':comments, 'images': images})
 
-@login_required
+@staff_member_required
 def delete_article(request, article_id):
     print(article_id)
     article = Article.objects.get(pk=article_id)
@@ -51,7 +52,7 @@ def delete_article(request, article_id):
     messages.success(request, 'Article deleted successfully.')
     return redirect('/overview/')
 
-@login_required
+@staff_member_required
 def delete_image(request, image_id):
     previous_page = request.META.get('HTTP_REFERER')
     image = Images.objects.get(pk=image_id)
@@ -100,7 +101,7 @@ def articles_overview(request):
 #     return HttpResponse(template.render(context, request))
 
 
-@login_required
+@staff_member_required
 def article_create(request):
     submitted = False
     form = ArticleForm()
@@ -126,7 +127,7 @@ def article_create(request):
 
 
 
-@login_required
+@staff_member_required
 def article_edit(request, article_id):
     article = Article.objects.get(pk=article_id)
     old_title=article.title

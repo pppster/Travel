@@ -7,42 +7,48 @@
 
 {% block content %}
 <br>
-<center>
-    <div class="card" style="width: 50%;">
-        <div class="card-header">
-            Login
-        </div>
-
-        <div class="card-body">
-            {% if not user.is_authenticated %}
-                {% if error %}
-                    <p class="lead">{{ error }}</p>
-                {% endif %}
-
-                <form action='' method='POST'>
-                    {% csrf_token %}
-
-
-
-                    <div class="mb-3" style="width:50%">
-                        <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Username">
-                     </div>
-                      <div class="mb-3" style="width:50%">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                      </div>
-
-                    <div>
-                        <button type='submit' class="btn btn-outline-secondary">Login</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-xl-6 mx-auto">
+            <center>
+                <div class="card h-100 border-3 shadow">
+                    <div class="card-header">
+                        Login
                     </div>
-                </form>
-                <br/>
 
-            <p class="lead">Need an account? Please <a href='/register'>Register</a> here</p>
-            {% else %}
-                <p class="lead">You're already logged in. See all the articles <a href='/overview'>here</a></p>
-                <p class="lead">Or would you like to <a href='/logout'>logout?</a></p>
-            {% endif %}
+                    <div class="card-body">
+                        {% if not user.is_authenticated %}
+                            {% if error %}
+                                <p class="lead">{{ error }}</p>
+                            {% endif %}
+
+                            <form action='' method='POST'>
+                                {% csrf_token %}
+
+
+
+                                <div class="mb-3" style="width:75%">
+                                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Username">
+                                </div>
+                                <div class="mb-3" style="width:75%">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                </div>
+
+                                <div>
+                                    <button type='submit' class="btn btn-outline-secondary">Login</button>
+                                </div>
+                            </form>
+                            <br/>
+
+                        <p class="lead">Need an account? Please <a href='/register'>Register</a> here</p>
+                        {% else %}
+                            <p class="lead">You're already logged in. See all the articles <a href='/overview'>here</a></p>
+                            <p class="lead">Or would you like to <a href='/logout'>logout?</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </center>
         </div>
     </div>
-</center>
+</div>
 {% endblock %}
