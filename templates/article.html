@@ -54,7 +54,16 @@ Article
             <p>{{comment.text}}</p>
             <footer class="blockquote-footer"><cite title="Source Title">on {{comment.date_created}} by {{ comment.creator|get_user_by_id }}</cite></footer>
             </blockquote>
-            <hr>
+            {% if user.is_superuser%}
+            <div class="col">
+              <a href={% url 'delete-comment' comment.id %} class="btn btn-outline-danger">Delete</a>
+            </div>
+            {% elif comment.creator == user.id%}
+            <div class="col">
+              <a href={% url 'delete-comment' comment.id %} class="btn btn-outline-danger">Delete</a>
+            </div>
+            {% endif%}
+            <br>
             {% endfor %}
           </div>
 

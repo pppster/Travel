@@ -73,6 +73,13 @@ def delete_image(request, image_id):
     # messages.success(request, 'Image deleted successfully.')
     
 
+@login_required
+def delete_comment(request, comment_id):
+    previous_page = request.META.get('HTTP_REFERER')
+    comment = Comment.objects.get(pk=comment_id)
+    comment.delete()
+    messages.success(request, 'Comment deleted successfully.')
+    return redirect(previous_page)
 
 
 def articles_overview(request):

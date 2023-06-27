@@ -11,4 +11,5 @@ urlpatterns = [
     path(route='overview/', view=views.articles_overview, name='article-overview'),
     path(route='article-delete/<int:article_id>/', view=views.delete_article, name='delete_article'),
     path(route='image-delete/<image_id>', view=views.delete_image, name='delete-image'),
+    path(route='comment-delete/<comment_id>', view=views.delete_comment, name='delete-comment'),
 ]
