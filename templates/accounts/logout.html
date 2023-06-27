@@ -21,8 +21,10 @@
                         {% if  request.user.is_authenticated %}        
                             <form method='POST'>{% csrf_token %}
                                 <p class="lead">Are you sure you want to logout?</p>
-                                <button type='submit' class="btn btn-outline-secondary">Yes, logout</button>
+                                <button type='submit' class="btn btn-outline-danger">Yes, logout</button>
                             </form>
+                            <br/>
+                            <a href='/overview'><button class="btn btn-outline-secondary">No, stay logged in</button></a>
                         {% else %}
                             <p class="lead">You're not logged in!</p>
                             <p class="lead">Would you like to <a href='/login'>login?</a></p>
